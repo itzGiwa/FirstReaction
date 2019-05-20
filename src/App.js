@@ -55,6 +55,23 @@ class App extends Component{
       padding: '8px',
       cursor: 'pointer'
     }
+
+    //when a component is re-rendered this method is called again
+    let person = null
+    if(this.state.showAmigos){
+      person = (
+      <div>
+      <button style={style} onClick={() => this.showMigosNickNameHandler('Quavo')}>Show Nick Names</button>
+
+      <Person name={this.state.persons[0].name} age={this.state.persons[0].age} click={this.showMigosNickNameHandler.bind(this, 'Qua')}/>
+      <Person name={this.state.persons[1].name} age={this.state.persons[1].age} />
+      <Person name={this.state.persons[2].name} age={this.state.persons[2].age} change={this.changeMigoNameHandler}/>
+      </div>
+      )
+    }else{
+      person = null
+    }
+
   return (
 
         //Always have a parent div wrapper
@@ -66,15 +83,7 @@ class App extends Component{
         <button style={style} onClick={this.showAmigosHanler}> Show Amigos</button>
 
         {/* Use to conditionally show or hide elements */}
-        { this.state.showAmigos ?
-        <div>
-        <button style={style} onClick={() => this.showMigosNickNameHandler('Quavo')}>Show Nick Names</button>
-
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} click={this.showMigosNickNameHandler.bind(this, 'Qua')}/>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age} />
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} change={this.changeMigoNameHandler}/>
-        </div> : null
-        }
+        {person}
 
         </div>
 
