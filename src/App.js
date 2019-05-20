@@ -62,10 +62,11 @@ class App extends Component{
       person = (
       <div>
       <button style={style} onClick={() => this.showMigosNickNameHandler('Quavo')}>Show Nick Names</button>
-
-      <Person name={this.state.persons[0].name} age={this.state.persons[0].age} click={this.showMigosNickNameHandler.bind(this, 'Qua')}/>
-      <Person name={this.state.persons[1].name} age={this.state.persons[1].age} />
-      <Person name={this.state.persons[2].name} age={this.state.persons[2].age} change={this.changeMigoNameHandler}/>
+      
+      {/* uses vanillaJs map function */}
+      {this.state.persons.map(migo => {
+        return <Person name={migo.name} age={migo.age}/>
+      })}
       </div>
       )
     }else{
