@@ -46,6 +46,15 @@ class App extends Component{
     })
   }
 
+  deleteMigoHandler = (migoIndex) => {
+    let migos = [...this.state.persons];
+      migos.splice(migoIndex, 1);
+
+      this.setState({
+        persons: migos
+      })
+  }
+
   render () {
 
     const style = {
@@ -64,8 +73,8 @@ class App extends Component{
       <button style={style} onClick={() => this.showMigosNickNameHandler('Quavo')}>Show Nick Names</button>
       
       {/* uses vanillaJs map function */}
-      {this.state.persons.map(migo => {
-        return <Person name={migo.name} age={migo.age}/>
+      {this.state.persons.map((migo, index) => {
+        return <Person name={migo.name} age={migo.age} click={() => this.deleteMigoHandler(index)}/>
       })}
       </div>
       )
