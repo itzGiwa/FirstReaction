@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './App.css';
-import Radium, {StyleRoot} from 'radium';
 import Person from './Person/Person';
 
 class App extends Component{
@@ -71,11 +70,7 @@ class App extends Component{
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'grey',
-        color: 'black'
-      }
+      cursor: 'pointer'
     }
 
     //when a component is re-rendered this method is called again
@@ -94,10 +89,6 @@ class App extends Component{
 
       style.backgroundColor = 'white';
       style.color = 'blue';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
 
     }else{
       person = null
@@ -114,10 +105,7 @@ class App extends Component{
     }
 
   return (
-
-    //wrap around root app to use media queries
-    <StyleRoot>
-        {/* //Always have a parent div wrapper */}
+        //Always have a parent div wrapper 
         <div className="App">
 
         <h1 className={classes.join(' ')}>Hola Amigos</h1>
@@ -130,10 +118,8 @@ class App extends Component{
 
         </div>
 
-    </StyleRoot>
-
         )
   }
 }
 
-export default Radium(App);
+export default App;
