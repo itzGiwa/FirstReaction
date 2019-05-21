@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import './App.css';
+import Radium from 'radium';
 import Person from './Person/Person';
 
 class App extends Component{
 
   state = {
     persons: [
-      {name : "Quavo" , age : 29},
-      {name : "Offset" , age : 27},
-      {name : "TakeOff" , age : 24}
+      {id: 1,name : "Quavo" , age : 29},
+      {id: 2,name : "Offset" , age : 27},
+      {id: 3, name : "TakeOff" , age : 24}
     ],
 
     showAmigos: false
@@ -27,16 +28,22 @@ class App extends Component{
     )
   }
 
-  changeMigoNameHandler = (event) => {
-    this.setState(
-      {
-        persons: [
-          {name : "Quavo" , age : 29},
-          {name : "Set" , age : 27},
-          {name : event.target.value , age : 24}
-        ]
-      }
-    )
+  changeMigoNameHandler = (event, id) => {
+
+    let migoIndex = this.state.persons.findIndex(x => x.id === id);
+
+    const person = {...this.state.persons[migoIndex]};
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+
+    persons[migoIndex] = person;
+
+    this.setState({
+      persons: persons
+    })
+
   }
 
   showAmigosHanler = () => {
@@ -57,8 +64,10 @@ class App extends Component{
 
   render () {
 
+    //this styling only applies to this component
     const style = {
-      backgrounColor: 'grey',
+      backgroundColor: 'black',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -74,12 +83,27 @@ class App extends Component{
       
       {/* uses vanillaJs map function */}
       {this.state.persons.map((migo, index) => {
-        return <Person name={migo.name} age={migo.age} click={() => this.deleteMigoHandler(index)}/>
+        return <Person name={migo.name} age={migo.age} click={() => this.deleteMigoHandler(index)} key={migo.id}
+        change={(event) => this.changeMigoNameHandler(event, migo.id)}/>
       })}
       </div>
       )
+
+      style.backgroundColor = 'white';
+      style.color = 'blue';
+
     }else{
       person = null
+    }
+
+    //classes must be declared in the app.css
+    let classes = [];
+    if(this.state.persons.length <= 1){
+      classes.push('red');
+    }
+    if(this.state.persons.length > 1){
+      classes = [];
+      classes.push('blueB');
     }
 
   return (
@@ -87,7 +111,7 @@ class App extends Component{
         //Always have a parent div wrapper
         <div className="App">
 
-        <h1>Hola Amigos</h1>
+        <h1 className={classes.join(' ')}>Hola Amigos</h1>
 
         {/* Use event handler and prefix method with Handler */}
         <button style={style} onClick={this.showAmigosHanler}> Show Amigos</button>
@@ -101,4 +125,4 @@ class App extends Component{
   }
 }
 
-export default App;
+export default Radium(App);
