@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import classList from './App.css';
 import Person from './Person/Person';
 
 class App extends Component{
@@ -63,18 +63,9 @@ class App extends Component{
 
   render () {
 
-    //this styling only applies to this component
-    const style = {
-      backgroundColor: 'black',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    }
-
     //when a component is re-rendered this method is called again
-    let person = null
+    let person = null;
+    let btnClass = '';
     if(this.state.showAmigos){
       person = (
       <div>
@@ -86,32 +77,20 @@ class App extends Component{
       })}
       </div>
       )
-
-      style.backgroundColor = 'white';
-      style.color = 'blue';
-
+      
+      btnClass = classList.Red;
     }else{
       person = null
     }
 
-    //classes must be declared in the app.css
-    let classes = [];
-    if(this.state.persons.length <= 1){
-      classes.push('red');
-    }
-    if(this.state.persons.length > 1){
-      classes = [];
-      classes.push('blueB');
-    }
-
   return (
         //Always have a parent div wrapper 
-        <div className="App">
+        <div className={classList.App}>
 
-        <h1 className={classes.join(' ')}>Hola Amigos</h1>
+        <h1>Hola Amigos</h1>
 
         {/* Use event handler and prefix method with Handler */}
-        <button style={style} onClick={this.showAmigosHanler}> Show Amigos</button>
+        <button className={btnClass} onClick={this.showAmigosHanler}> Show Amigos</button>
 
         {/* Use to conditionally show or hide elements */}
         {person}
