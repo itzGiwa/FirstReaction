@@ -1,15 +1,18 @@
 import React from 'react';
 import classList from './Person.css';
-import WithClass from '../../../hoc/WithClass';
+import withClass from '../../../hoc/withClass';
+import Auxi from '../../../hoc/Auxi'
  
 const person = (props) => {
 
-    return <WithClass classes={classList.Person} >
+    return (
+        <Auxi>
     <p onClick={props.click}>
        Its {props.name}, {props.age}yrs from the migos !!!
     </p>
     <input type="text" onChange={props.change} value={props.name}/>
-    </WithClass>
+    </Auxi>
+    )
 }
 
-export default person;
+export default withClass(person, classList.Person);

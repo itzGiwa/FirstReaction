@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-const withClass = (props) => {
-    return (
-        <div className={props.classes}>
-            {props.children}
+const withClass = (Component , parentClass) => {
+    return (props) => {
+        return <div className={parentClass}>
+        <Component/>
         </div>
-    )
+    }
 }
 
-export default withClass;
+export default withClass
