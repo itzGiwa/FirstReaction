@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import classList from './App.css';
 import Persons from '../Components/Persons/Persons';
-import Cockpit from '../Components/Cockpit/Cockpit'
+import Cockpit from '../Components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
 
 class App extends Component{
 
@@ -65,13 +66,15 @@ class App extends Component{
 
   return (
         //Always have a parent div wrapper 
-        <div className={classList.App}>
-
+        // <div className={classList.App}>
+        <WithClass classes={classList.App}>
         <Cockpit clicked={this.showAmigosHanler} showPerson={this.state.showAmigos} />
         {/* Use to conditionally show or hide elements */}
         {person}
+        
+        {/* </div> */}
+        </WithClass>
 
-        </div>
 
         )
   }

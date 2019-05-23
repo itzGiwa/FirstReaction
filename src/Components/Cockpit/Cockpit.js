@@ -4,9 +4,9 @@ import Auxi from '../../hoc/Auxi';
 
 const cockpit = (props) => {
 
-    let btnClass = '';
+    let btnClass = classList.Button;
     if(props.showPerson) {
-        btnClass = classList.Red;
+        btnClass = [classList.Button, classList.Red].join(' ');
     }
 
     return (
