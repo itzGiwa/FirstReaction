@@ -5,6 +5,8 @@ import Cockpit from '../Components/Cockpit/Cockpit';
 import withClass from '../hoc/withClass';
 import Auxi from '../hoc/Auxi';
 
+export const AuthContext = React.createContext(false);
+
 class App extends Component{
 
   state = {
@@ -13,8 +15,14 @@ class App extends Component{
       {id: 2,name : "Offset" , age : 27},
       {id: 3, name : "TakeOff" , age : 24}
     ],
-
+    isAuthenticated: false,
     showAmigos: false
+  }
+
+  authenticateAmigosHandler = () => {
+    this.setState({
+      isAuthenticated : true
+    })
   }
 
   changeMigoNameHandler = (event, id) => {
@@ -69,9 +77,12 @@ class App extends Component{
         //Always have a parent div wrapper 
         // <div className={classList.App}>
         <Auxi>
-        <Cockpit clicked={this.showAmigosHanler} showPerson={this.state.showAmigos} />
+        <Cockpit clicked={this.showAmigosHanler} showPerson={this.state.showAmigos} authenticate={this.authenticateAmigosHandler}/>
         {/* Use to conditionally show or hide elements */}
+        {/* Use AuthContext to wrap child element  */}
+        <AuthContext.Provider value={this.state.isAuthenticated}>
         {person}
+        </AuthContext.Provider>
         
         {/* </div> */}
         </Auxi>
