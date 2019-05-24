@@ -1,4 +1,9 @@
-# FirstReaction
+# FirstReaction -
+
+*npm install -g create-react-app*
+
+*create-react-app 'nameofapp'
+
 my First React App
 
 Areas convered
